@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Codeer.Friendly.Windows.Grasp</id>
+    <version>2.2.0</version>
+    <title>Friendly.Windows.Grasp</title>
+    <authors>Codeer</authors>
+    <owners>Codeer</owners>
+    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0.html</licenseUrl>
+    <projectUrl>http://www.english.codeer.co.jp/test-automation/api-reference/codeer-friendly-windows-grasp-dll</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>You will be able to get the desired window. This library is built on Friendly Layer.</description>
+    <tags>Friendly Testing Windows WPF WinForms Win32 Automation</tags>
+    <dependencies>
+      <dependency id="Codeer.Friendly" version="2.1.0" />
+      <dependency id="Codeer.Friendly.Windows" version="2.1.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\ReleaseBinary\Codeer.Friendly.Windows.Grasp.dll" target="lib\net20" />
+    <file src="..\ReleaseBinary\Codeer.Friendly.Windows.Grasp.xml" target="lib\net20" />
+    <file src="..\ReleaseBinary\ja\Codeer.Friendly.Windows.Grasp.xml" target="lib\net20\ja" />
+    <file src="..\ReleaseBinary\ja\Codeer.Friendly.Windows.Grasp.resources.dll" target="lib\net20\ja" />
+  </files>
+</package>

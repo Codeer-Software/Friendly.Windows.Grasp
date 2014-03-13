@@ -1,0 +1,1 @@
+nuget pack friendly.windows.grasp.nuspec
