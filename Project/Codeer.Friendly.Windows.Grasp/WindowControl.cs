@@ -305,26 +305,45 @@ namespace Codeer.Friendly.Windows.Grasp
 
 #if ENG
         /// <summary>
-        /// Constructor.
+        /// Currently deprecated. 
+        /// Please use WindowControl(AppVar windowObject).
         /// </summary>
         /// <param name="app">Application manipulation object. </param>
         /// <param name="windowObject">AppVar for a window variable within the application, pertaining to the window to manipulate.</param>
 #else
         /// <summary>
-        /// コンストラクタです。
+        /// 現在非推奨です。
+        /// WindowControl(AppVar windowObject)を使用してください。
         /// </summary>
         /// <param name="app">アプリケーション操作クラス。</param>
         /// <param name="windowObject">WindowControlで操作する対象のウィンドウのオブジェクトの格納されたアプリケーション内変数です。</param>
 #endif
+        [Obsolete("Please use WindowControl(AppVar windowObject).", false)]
         public WindowControl(WindowsAppFriend app, AppVar windowObject)
+            : this(windowObject) { }
+
+#if ENG
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="windowObject">AppVar for a window variable within the application, pertaining to the window to manipulate.</param>
+#else
+        /// <summary>
+        /// コンストラクタです。
+        /// </summary>
+        /// <param name="windowObject">WindowControlで操作する対象のウィンドウのオブジェクトの格納されたアプリケーション内変数です。</param>
+#endif
+        public WindowControl(AppVar windowObject)
         {
-            if (app == null)
+            if (windowObject == null)
             {
-                throw new ArgumentNullException("app");
+                throw new ArgumentNullException("windowObject");
             }
+            WindowsAppFriend app = (WindowsAppFriend)windowObject.App;
             AppVar ohterSystemAnalyzers = TargetAppInitializer.Initialize(app);
             InitializeFromaHandle(app, (IntPtr)app[typeof(WindowAnalyzer), "GetHandle"](windowObject, ohterSystemAnalyzers).Core);
         }
+
 
 #if ENG
         /// <summary>
