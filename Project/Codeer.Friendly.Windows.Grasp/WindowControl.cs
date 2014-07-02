@@ -1575,7 +1575,7 @@ namespace Codeer.Friendly.Windows.Grasp
         static bool IsTopLevelWindowInTarget(IntPtr handle)
         {
             bool isTopLevel = false;
-            NativeMethods.EnumWindows(delegate(IntPtr hWnd, IntPtr lParam)
+            NativeMethods.EnumWindowsDelegate func = delegate(IntPtr hWnd, IntPtr lParam)
             {
                 if (handle == hWnd)
                 {
@@ -1583,7 +1583,9 @@ namespace Codeer.Friendly.Windows.Grasp
                     return 0;
                 }
                 return 1;
-            }, IntPtr.Zero);
+            };
+            NativeMethods.EnumWindows(func, IntPtr.Zero);
+            GC.KeepAlive(func);
             return isTopLevel;
         }
 
