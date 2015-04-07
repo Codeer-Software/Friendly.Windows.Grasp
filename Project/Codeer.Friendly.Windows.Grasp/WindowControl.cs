@@ -1241,31 +1241,42 @@ namespace Codeer.Friendly.Windows.Grasp
         /// Used to synchronously wait for the next window to be shown when modal dialogs are displayed asynchronously. 
         /// Returns when its own window enters the Disable state and another window becomes the application's only top-level window. 
         /// Also returns if the indicated asynchronous operation completes before a window moves to the front. 
+        /// Also returns if this window is destroyed before a window moves to the front. 
         /// </summary>
         /// <param name="async">Asynchronous object.</param>
         /// <returns>
         /// Window manipulation object.
         /// Returns null if the Async operation completes before a window moves to the front.
+        /// Returns null if this window is destroyed before a window moves to the front.
         /// </returns>
 #else
         /// <summary>
         /// モーダルダイアログ表示が表示される処理を非同期で呼び出した場合に、次の画面が表示されるまで同期をとるのに使用します。
         /// 自身のウィンドウがDisable状態になり、別のウィンドウがアプリケーション内でただ一つの有効状態で可視状態のトップレベルウィンドウになった場合それを返します。
         /// また、次のモーダルダイアログが表示されるまでに渡された非同期オブジェクト(async)が操作完了した場合にも終了します。
+        /// また、次のモーダルダイアログが表示されるまでに、このウィンドウが破棄された場合にも終了します。
         /// </summary>
         /// <param name="async">非同期処理オブジェクト。</param>
-        /// <returns>モーダルダイアログ。(表示前に、非同期処理が終了した場合はnull)。</returns>
+        /// <returns>モーダルダイアログ。(表示前に非同期処理が終了した場合はnull、表示前にこのウィンドウが破棄された場合もnull)。</returns>
 #endif
         public WindowControl WaitForNextModal(Async async)
         {
             //トップレベルウィンドウのみ可能
             if (!IsTopLevelWindow())
             {
+                if (!IsWindow())
+                {
+                    return null;
+                }
                 throw new NotSupportedException(ToErrorWidthWindowInfo(Resources.TopLevelOnly));
             }
             while (true)
             {
                 IntPtr[] next = (IntPtr[])App[typeof(WindowPositionUtility), "GetTopLevelWindows"]().Core;
+                if (!IsWindow())
+                {
+                    return null;
+                }
                 if (next.Length == 1 && next[0] != Handle)
                 {
                     return new WindowControl(App, next[0]);
