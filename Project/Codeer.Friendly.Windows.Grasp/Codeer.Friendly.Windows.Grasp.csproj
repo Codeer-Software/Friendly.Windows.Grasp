@@ -81,6 +81,14 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="ScreenTransition\ClickModal.cs" />
+    <Compile Include="ScreenTransition\InvokeModal.cs" />
+    <Compile Include="ScreenTransition\ClickModalOrSync.cs" />
+    <Compile Include="ScreenTransition\InvokeModalOrSync.cs" />
+    <Compile Include="ScreenTransition\ClickModeless.cs" />
+    <Compile Include="ScreenTransition\InvokeModeless.cs" />
+    <Compile Include="ScreenTransition\ClickSync.cs" />
+    <Compile Include="ScreenTransition\InvokeSync.cs" />
     <Compile Include="WindowControl.cs" />
     <Compile Include="WindowIdentifyException.cs" />
     <Compile Include="Inside\WindowInfo.cs" />
