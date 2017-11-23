@@ -109,4 +109,5 @@ UpgradeLog*.XML
 
 packages/
 ReleaseBinary/
+.vs/
 *.nupkg
