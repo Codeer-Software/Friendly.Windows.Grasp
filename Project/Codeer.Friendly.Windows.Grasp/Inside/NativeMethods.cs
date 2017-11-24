@@ -70,11 +70,46 @@ namespace Codeer.Friendly.Windows.Grasp.Inside
 			public int top;
 			public int right;
 			public int bottom;
-		}
+        }
 
-		/// <summary>
+        /// <summary>
+        /// 先祖フラグ
+        /// </summary>
+        internal enum GetAncestorFlags
+        {
+            GA_PARENT = 1,
+            GA_ROOT = 2,
+            GA_ROOTOWNER = 3
+        }
+
+        /// <summary>
+        /// アクティブなウィンドウを取得
+        /// </summary>
+        /// <returns>アクティブなウィンドウ</returns>
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetActiveWindow();
+
+        /// <summary>
+        /// 先祖ウィンドウ取得
+        /// </summary>
+        /// <param name="hWnd">ウィンドウハンドル</param>
+        /// <param name="flags">フラグ</param>
+        /// <returns>先祖ウィンドウ</returns>
+        [DllImport("user32.dll", ExactSpelling = true)]
+        internal static extern IntPtr GetAncestor(IntPtr hWnd, GetAncestorFlags flags);
+
+        /// <summary>
+        /// 前面のウィンドウを取得
+        /// </summary>
+        /// <param name="hWnd">ウィンドウハンドル</param>
+        /// <returns>前面のウィンドウ</returns>
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static extern bool SetForegroundWindow(IntPtr hWnd);
+
+        /// <summary>
         /// ウィンドウ列挙時のハンドラ。
-		/// </summary>
+        /// </summary>
         /// <param name="hWnd">ウィンドウハンドル。</param>
         /// <param name="lParam">パラメータ。</param>
         /// <returns>0を返すと列挙終了。</returns>
@@ -197,7 +232,19 @@ namespace Codeer.Friendly.Windows.Grasp.Inside
         /// <param name="lpRect">矩形。</param>
         /// <returns>成否。</returns>
 		[DllImport("user32.dll")]
-		internal static extern int GetWindowRect(IntPtr hwnd, ref  RECT lpRect);
+		internal static extern int GetWindowRect(IntPtr hwnd, ref RECT lpRect);
+
+        /// <summary>
+        /// ウィンドウ矩形の取得。
+        /// </summary>
+        /// <param name="hwnd">ウィンドウハンドル。</param>
+        /// <returns>矩形</returns>
+        internal static Rectangle GetWindowRectEx(IntPtr hwnd)
+        {
+            var rc = new RECT();
+            GetWindowRect(hwnd, ref rc);
+            return new Rectangle(rc.left, rc.top, rc.right - rc.left, rc.bottom - rc.top);
+        }
 
 		/// <summary>
         /// クラス名称を取得。
@@ -223,5 +270,26 @@ namespace Codeer.Friendly.Windows.Grasp.Inside
         /// <returns>現在のスレッドID。</returns>
         [DllImport("kernel32.dll")]
         internal static extern int GetCurrentThreadId();
-	}
+
+        /// <summary>
+        /// クライアント座標からスクリーン座標に変換
+        /// </summary>
+        /// <param name="hWnd">ウィンドウハンドル。</param>
+        /// <param name="lpPoint">座標</param>
+        /// <returns>成否</returns>
+        [DllImport("user32.dll")]
+        internal static extern bool ClientToScreen(IntPtr hWnd, ref Point lpPoint);
+
+        /// <summary>
+        /// クライアント座標からスクリーン座標に変換
+        /// </summary>
+        /// <param name="hWnd">ウィンドウハンドル。</param>
+        /// <param name="point"> クライアント座標</param>
+        /// <returns>スクリーン座標</returns>
+        internal static Point ClientToScreenEx(IntPtr hWnd, Point point)
+        {
+            ClientToScreen(hWnd, ref point);
+            return point;
+        }
+    }
 }

@@ -4,11 +4,7 @@ using System.Text;
 using System.Drawing;
 using System.Diagnostics;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Threading;
-using System.Windows.Forms;
-using Codeer.Friendly;
-using Codeer.Friendly.Windows;
 using Codeer.Friendly.Windows.Grasp.Inside;
 using Codeer.Friendly.Windows.Grasp.Inside.InApp;
 using Codeer.Friendly.Windows.Grasp.Properties;
@@ -28,7 +24,7 @@ namespace Codeer.Friendly.Windows.Grasp
     /// WPFにも対応しています。
     /// </summary>
 #endif
-    public class WindowControl : IAppVarOwner
+    public class WindowControl : IAppVarOwner, IUIObject
     {
         WindowsAppFriend _app;
         WindowInfo _root;
@@ -150,6 +146,24 @@ namespace Codeer.Friendly.Windows.Grasp
             {
                 IntPtr parent = (IntPtr)App[typeof(NativeMethods), "GetParent"](Handle).Core;
                 return (parent == IntPtr.Zero) ? null : new WindowControl(App, parent);
+            }
+        }
+
+#if ENG
+        /// <summary>
+        /// Returns the size of IUIObject.
+        /// </summary>
+#else
+        /// <summary>
+        /// IUIObjectのサイズを取得します。
+        /// </summary>
+#endif
+        public Size Size
+        {
+            get
+            {
+                var rc = (Rectangle)App[typeof(NativeMethods), "GetWindowRectEx"](Handle).Core;
+                return rc.Size;
             }
         }
 
@@ -1291,6 +1305,117 @@ namespace Codeer.Friendly.Windows.Grasp
 
 #if ENG
         /// <summary>
+        /// Operation in which Window is displayed. 
+        /// </summary>
+#else
+        /// <summary>
+        /// ウィンドウが表示される動作
+        /// </summary>
+#endif
+        public delegate void ShowWindowAction();
+
+#if ENG
+        /// <summary>
+        /// Wait for the next window to appear. 
+        /// </summary>
+        /// <param name="action">Wait for the next window to appear. </param>
+        /// <returns>Next window.</returns>
+#else
+        /// <summary>
+        /// 次のウィンドウが表示されるのを待ちます。
+        /// </summary>
+        /// <param name="action">ウィンドウが表示される動作。</param>
+        /// <returns>次のウィンドウ。</returns>
+#endif
+        public WindowControl WaitForNextWindow(ShowWindowAction action)
+            => WaitForNextWindow(action, null);
+
+#if ENG
+        /// <summary>
+        /// Wait for the next window to appear. 
+        /// </summary>
+        /// </summary>
+        /// <param name="action">Wait for the next window to appear. </param>
+        /// <param name="async">Asynchronous object.</param>
+        /// <returns>Next window.</returns>
+#else
+        /// <summary>
+        /// ウィンドウが表示される動作
+        /// </summary>
+        /// <param name="action">ウィンドウが表示される動作。</param>
+        /// <param name="async">非同期処理オブジェクト。</param>
+        /// <returns>次のウィンドウ。(表示前に非同期処理が終了した場合はnull)。</returns>
+#endif
+        public WindowControl WaitForNextWindow(ShowWindowAction action, Async async)
+        {
+            var oldWindows = GetTopLevelWindows(App);
+            action();
+
+            while (true)
+            {
+                if (async != null && async.IsCompleted) return null;
+
+                var newWindows = GetTopLevelWindows(App);
+                foreach (var x in newWindows)
+                {
+                    var hit = false;
+                    foreach (var y in oldWindows)
+                    {
+                        if (x.Handle == y.Handle)
+                        {
+                            hit = true;
+                            break;
+                        }
+                    }
+                    if (!hit)
+                    {
+                        return x;
+                    }
+                }
+            }
+        }
+
+#if ENG
+        /// <summary>
+        /// Retrieve the next window displayed after the specified processing. 
+        /// </summary>
+        /// <param name="action">Wait for the next window to appear. </param>
+        /// <returns>Next windows.</returns>
+#else
+        /// <summary>
+        /// 指定の処理の次に表示されたウィンドウを取得します。
+        /// </summary>
+        /// <param name="action">ウィンドウが表示される動作。</param>
+        /// <returns>次のウィンドウ。</returns>
+#endif
+        public WindowControl[] GetNextWindows(ShowWindowAction action)
+        {
+            var oldWindows = GetTopLevelWindows(App);
+            action();
+            var newWindows = GetTopLevelWindows(App);
+
+            var list = new List<WindowControl>();
+            foreach (var x in newWindows)
+            {
+                var hit = false;
+                foreach (var y in oldWindows)
+                {
+                    if (x.Handle == y.Handle)
+                    {
+                        hit = true;
+                        break;
+                    }
+                }
+                if (!hit)
+                {
+                    list.Add(x);
+                }
+            }
+            return list.ToArray();
+        }
+
+#if ENG
+        /// <summary>
         /// Waits for the window to be destroyed. 
         /// </summary>
 #else
@@ -1490,6 +1615,48 @@ namespace Codeer.Friendly.Windows.Grasp
         {
             _app[typeof(MessageUtility), "SendMessage", async](Handle, info);
         }
+
+#if ENG
+        /// <summary>
+        /// Convert IUIObject's client coordinates to screen coordinates.
+        /// </summary>
+        /// <param name="clientPoint">client coordinates.</param>
+        /// <returns>screen coordinates.</returns>
+#else
+        /// <summary>
+        /// IUIObjectのクライアント座標からスクリーン座標に変換します。
+        /// </summary>
+        /// <param name="clientPoint">クライアント座標</param>
+        /// <returns>スクリーン座標</returns>
+#endif
+        public Point PointToScreen(Point clientPoint)
+            => (Point)App[typeof(NativeMethods), "ClientToScreenEx"](Handle, clientPoint).Core;
+
+#if ENG
+        /// <summary>
+        /// Make it active.
+        /// </summary>
+#else
+        /// <summary>
+        /// アクティブな状態にします。
+        /// </summary>
+#endif
+        public void Activate()
+        {
+            var root = (IntPtr)App[typeof(NativeMethods), "GetAncestor"](Handle, NativeMethods.GetAncestorFlags.GA_ROOT).Core;
+            while ((IntPtr)App[typeof(NativeMethods), "GetActiveWindow"]().Core != root)
+            {
+                App[typeof(NativeMethods), "SetForegroundWindow"](root);
+                Thread.Sleep(1);
+            }
+            SetFocus();
+        }
+
+        /// <summary>
+        /// ウィンドウを閉じます。
+        /// </summary>
+        public void Close()
+            => SendMessage(0x10, IntPtr.Zero, IntPtr.Zero);
 
         /// <summary>
         /// WindowInfoヒットチェック。

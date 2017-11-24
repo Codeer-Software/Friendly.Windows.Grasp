@@ -52,9 +52,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>packages\Codeer.Friendly.2.5.0\lib\net20\Codeer.Friendly.dll</HintPath>
     </Reference>
-    <Reference Include="Codeer.Friendly.Windows, Version=2.6.0.0, Culture=neutral, PublicKeyToken=532f270f1da385b3, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\Codeer.Friendly.Windows.2.6.0\lib\net20\Codeer.Friendly.Windows.dll</HintPath>
+    <Reference Include="Codeer.Friendly.Windows, Version=2.7.0.0, Culture=neutral, PublicKeyToken=532f270f1da385b3, processorArchitecture=MSIL">
+      <HintPath>packages\Codeer.Friendly.Windows.2.7.0\lib\net20\Codeer.Friendly.Windows.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
@@ -67,6 +66,7 @@
     <Compile Include="Inside\NativeMethods.cs" />
     <Compile Include="Inside\InApp\WindowAnalyzer.cs" />
     <Compile Include="Inside\TargetAppInitializer.cs" />
+    <Compile Include="IUIObject.cs" />
     <Compile Include="MessageInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
