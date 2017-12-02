@@ -130,6 +130,9 @@
     <value>指定のGUI要素はWindowハンドルを持たないため、指定のメソッド、もしくはコンストラクタは使用できません。
 他の取得方法を使用してください。</value>
   </data>
+  <data name="TargetWindowVanish" xml:space="preserve">
+    <value>対象のウィンドウが消滅しました</value>
+  </data>
   <data name="TopLevelOnly" xml:space="preserve">
     <value>指定の操作はトップレベルのウィンドウにのみ実行可能です。</value>
   </data>

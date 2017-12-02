@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Codeer.Friendly.Windows.Grasp</id>
-    <version>2.6.0</version>
+    <version>2.7.0</version>
     <title>Friendly.Windows.Grasp</title>
     <authors>Codeer</authors>
     <owners>Codeer</owners>
@@ -19,9 +19,16 @@
     </frameworkAssemblies>
   </metadata>
   <files>
-    <file src="..\ReleaseBinary\Codeer.Friendly.Windows.Grasp.dll" target="lib\net20" />
-    <file src="..\ReleaseBinary\Codeer.Friendly.Windows.Grasp.xml" target="lib\net20" />
-    <file src="..\ReleaseBinary\ja\Codeer.Friendly.Windows.Grasp.xml" target="lib\net20\ja" />
-    <file src="..\ReleaseBinary\ja\Codeer.Friendly.Windows.Grasp.resources.dll" target="lib\net20\ja" />
+    <file src="..\ReleaseBinary\Codeer.Friendly.Windows.Grasp.2.0.dll" target="lib\net20" />
+    <file src="..\ReleaseBinary\Codeer.Friendly.Windows.Grasp.2.0.xml" target="lib\net20" />
+    <file src="..\ReleaseBinary\Codeer.Friendly.Windows.Grasp.2.0.dll" target="lib\net35" />
+    <file src="..\ReleaseBinary\Codeer.Friendly.Windows.Grasp.2.0.xml" target="lib\net35" />
+    <file src="..\ReleaseBinary\Codeer.Friendly.Windows.Grasp.3.5.dll" target="lib\net35" />
+    <file src="..\ReleaseBinary\Codeer.Friendly.Windows.Grasp.3.5.xml" target="lib\net35" />
+    <file src="..\ReleaseBinary\ja\Codeer.Friendly.Windows.Grasp.2.0.xml" target="lib\net20\ja" />
+    <file src="..\ReleaseBinary\ja\Codeer.Friendly.Windows.Grasp.2.0.resources.dll" target="lib\net20\ja" />
+    <file src="..\ReleaseBinary\ja\Codeer.Friendly.Windows.Grasp.2.0.xml" target="lib\net35\ja" />
+    <file src="..\ReleaseBinary\ja\Codeer.Friendly.Windows.Grasp.2.0.resources.dll" target="lib\net35\ja" />
+    <file src="..\ReleaseBinary\ja\Codeer.Friendly.Windows.Grasp.3.5.xml" target="lib\net35\ja" />
   </files>
 </package>

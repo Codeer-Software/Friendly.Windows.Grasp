@@ -1318,23 +1318,25 @@ namespace Codeer.Friendly.Windows.Grasp
         /// <summary>
         /// Wait for the next window to appear. 
         /// </summary>
+        /// <param name="app">Application manipulation object. </param>
         /// <param name="action">Wait for the next window to appear. </param>
         /// <returns>Next window.</returns>
 #else
         /// <summary>
         /// 次のウィンドウが表示されるのを待ちます。
         /// </summary>
+        /// <param name="app">アプリケーション操作クラス。</param>
         /// <param name="action">ウィンドウが表示される動作。</param>
         /// <returns>次のウィンドウ。</returns>
 #endif
-        public WindowControl WaitForNextWindow(ShowWindowAction action)
-            => WaitForNextWindow(action, null);
+        public static WindowControl WaitForNextWindow(WindowsAppFriend app, ShowWindowAction action)
+            => WaitForNextWindow(app, action, null);
 
 #if ENG
         /// <summary>
         /// Wait for the next window to appear. 
         /// </summary>
-        /// </summary>
+        /// <param name="app">Application manipulation object. </param>
         /// <param name="action">Wait for the next window to appear. </param>
         /// <param name="async">Asynchronous object.</param>
         /// <returns>Next window.</returns>
@@ -1342,20 +1344,21 @@ namespace Codeer.Friendly.Windows.Grasp
         /// <summary>
         /// ウィンドウが表示される動作
         /// </summary>
+        /// <param name="app">アプリケーション操作クラス。</param>
         /// <param name="action">ウィンドウが表示される動作。</param>
         /// <param name="async">非同期処理オブジェクト。</param>
         /// <returns>次のウィンドウ。(表示前に非同期処理が終了した場合はnull)。</returns>
 #endif
-        public WindowControl WaitForNextWindow(ShowWindowAction action, Async async)
-        {
-            var oldWindows = GetTopLevelWindows(App);
+        public static WindowControl WaitForNextWindow(WindowsAppFriend app, ShowWindowAction action, Async async)
+        { 
+            var oldWindows = GetTopLevelWindows(app);
             action();
 
             while (true)
             {
                 if (async != null && async.IsCompleted) return null;
 
-                var newWindows = GetTopLevelWindows(App);
+                var newWindows = GetTopLevelWindows(app);
                 foreach (var x in newWindows)
                 {
                     var hit = false;
@@ -1379,20 +1382,22 @@ namespace Codeer.Friendly.Windows.Grasp
         /// <summary>
         /// Retrieve the next window displayed after the specified processing. 
         /// </summary>
+        /// <param name="app">アプリケーション操作クラス。</param>
         /// <param name="action">Wait for the next window to appear. </param>
         /// <returns>Next windows.</returns>
 #else
         /// <summary>
         /// 指定の処理の次に表示されたウィンドウを取得します。
         /// </summary>
+        /// <param name="app">アプリケーション操作クラス。</param>
         /// <param name="action">ウィンドウが表示される動作。</param>
         /// <returns>次のウィンドウ。</returns>
 #endif
-        public WindowControl[] GetNextWindows(ShowWindowAction action)
+        public static WindowControl[] GetNextWindows(WindowsAppFriend app, ShowWindowAction action)
         {
-            var oldWindows = GetTopLevelWindows(App);
+            var oldWindows = GetTopLevelWindows(app);
             action();
-            var newWindows = GetTopLevelWindows(App);
+            var newWindows = GetTopLevelWindows(app);
 
             var list = new List<WindowControl>();
             foreach (var x in newWindows)
@@ -1648,6 +1653,10 @@ namespace Codeer.Friendly.Windows.Grasp
             {
                 App[typeof(NativeMethods), "SetForegroundWindow"](root);
                 Thread.Sleep(1);
+                if (!IsWindow())
+                {
+                    throw new WindowIdentifyException(Resources.TargetWindowVanish);
+                }
             }
             SetFocus();
         }

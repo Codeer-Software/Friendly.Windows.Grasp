@@ -130,6 +130,9 @@ The window could not be identified.</value>
     <value>Since the selected GUI element does not have a Window handle, the specified method or a constructor cannot be used.
 Please use a different acquisition method.</value>
   </data>
+  <data name="TargetWindowVanish" xml:space="preserve">
+    <value>The target window has vanished.</value>
+  </data>
   <data name="TopLevelOnly" xml:space="preserve">
     <value>The appointed operation can only be performed in a top-level window.</value>
   </data>
@@ -149,7 +152,7 @@ WindowClass [{2}]</value>
   <data name="WindowNotFound" xml:space="preserve">
     <value>The specified window could not be found.</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="WpfAnalyzer" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WpfAnalyzer.cs;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
