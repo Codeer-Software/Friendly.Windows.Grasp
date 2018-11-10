@@ -1661,11 +1661,31 @@ namespace Codeer.Friendly.Windows.Grasp
             SetFocus();
         }
 
+#if ENG
+        /// <summary>
+        /// Close Window.
+        /// </summary>
+#else
         /// <summary>
         /// ウィンドウを閉じます。
         /// </summary>
+#endif
         public void Close()
             => SendMessage(0x10, IntPtr.Zero, IntPtr.Zero);
+
+#if ENG
+        /// <summary>
+        /// Close Window.
+        /// </summary>
+        /// <param name="async">Asynchronous execution object.</param>
+#else
+        /// <summary>
+        /// ウィンドウを閉じます。
+        /// </summary>
+        /// <param name="async">非同期実行オブジェクト。</param>
+#endif
+        public void Close(Async async)
+            => SendMessage(0x10, IntPtr.Zero, IntPtr.Zero, async);
 
         /// <summary>
         /// WindowInfoヒットチェック。
