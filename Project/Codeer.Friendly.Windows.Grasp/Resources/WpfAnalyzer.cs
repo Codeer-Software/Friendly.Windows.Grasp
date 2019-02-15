@@ -295,7 +295,7 @@ namespace Codeer.Friendly.Windows.Wpf.Grasp
             info.TargetObject = target;
             info.TypeFullName = target.GetType().FullName;
             FrameworkElement frameworkElement = target as FrameworkElement;
-            if (frameworkElement != null)
+            if (frameworkElement != null && frameworkElement.IsLoaded)
             {
                 try
                 {
