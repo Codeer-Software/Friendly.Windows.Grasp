@@ -239,6 +239,7 @@ namespace Codeer.Friendly.Windows.Wpf.Grasp
                 int index = 0;
                 foreach (object child in LogicalTreeHelper.GetChildren(dep))
                 {
+                    if (child == null) continue;
                     logicalIndex.Add(index);
                     list.Add(GetWIndowInfoLogicalIndex(child, rootPos, logicalIndex));
                     logicalIndex.RemoveAt(logicalIndex.Count - 1);
@@ -270,6 +271,7 @@ namespace Codeer.Friendly.Windows.Wpf.Grasp
                 for (int index = 0; index < count; index++)
                 {
                     object child = VisualTreeHelper.GetChild(visual, index);
+                    if (child == null) continue;
                     visualIndex.Add(index);
                     list.Add(GetWIndowInfoVisualIndex(child, rootPos, visualIndex));
                     visualIndex.RemoveAt(visualIndex.Count - 1);
