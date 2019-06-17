@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26730.12
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.452
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codeer.Friendly.Windows.Grasp.2.0", "Codeer.Friendly.Windows.Grasp.2.0.csproj", "{C30EB623-008A-4424-9048-9528544A5CCD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codeer.Friendly.Windows.Grasp.3.5", "..\Codeer.Friendly.Windows.Grasp.3.5\Codeer.Friendly.Windows.Grasp.3.5.csproj", "{9E5E0422-D4A4-4FB4-9A48-198D15C4D996}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "..\Test\Test.csproj", "{D09F4635-C19B-4CF3-83EF-8CD8690D4D23}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +28,12 @@ Global
 		{9E5E0422-D4A4-4FB4-9A48-198D15C4D996}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9E5E0422-D4A4-4FB4-9A48-198D15C4D996}.Release-Eng|Any CPU.ActiveCfg = Release-Eng|Any CPU
 		{9E5E0422-D4A4-4FB4-9A48-198D15C4D996}.Release-Eng|Any CPU.Build.0 = Release-Eng|Any CPU
+		{D09F4635-C19B-4CF3-83EF-8CD8690D4D23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D09F4635-C19B-4CF3-83EF-8CD8690D4D23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D09F4635-C19B-4CF3-83EF-8CD8690D4D23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D09F4635-C19B-4CF3-83EF-8CD8690D4D23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D09F4635-C19B-4CF3-83EF-8CD8690D4D23}.Release-Eng|Any CPU.ActiveCfg = Release|Any CPU
+		{D09F4635-C19B-4CF3-83EF-8CD8690D4D23}.Release-Eng|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -11,6 +11,7 @@ using System.Runtime.InteropServices;
 using Codeer.Friendly.Windows.Grasp.Inside;
 using System.Diagnostics.CodeAnalysis;
 using System.Windows.Media;
+using System.Reflection;
 
 namespace Codeer.Friendly.Windows.Wpf.Grasp
 {
@@ -301,15 +302,30 @@ namespace Codeer.Friendly.Windows.Wpf.Grasp
             {
                 try
                 {
-                    System.Windows.Point pos = frameworkElement.PointToScreen(new System.Windows.Point(0, 0));
-                    info.Bounds = new Rectangle((int)(pos.X - rootPos.X), (int)(pos.Y - rootPos.Y),
-                        (int)frameworkElement.ActualWidth, (int)frameworkElement.ActualHeight);
+                    if (HasVisualParent(frameworkElement))
+                    {
+                        System.Windows.Point pos = frameworkElement.PointToScreen(new System.Windows.Point(0, 0));
+                        info.Bounds = new Rectangle((int)(pos.X - rootPos.X), (int)(pos.Y - rootPos.Y),
+                            (int)frameworkElement.ActualWidth, (int)frameworkElement.ActualHeight);
+                    }
                 }
                 catch { }
             }
             info.LogicalTreeIndex = logicalIndex.ToArray();
             info.VisualTreeIndex = visualIndex.ToArray();
             return info;
+        }
+
+        static bool HasVisualParent(object target)
+        {
+            var dep = target as DependencyObject;
+            while (dep != null)
+            {
+                var window = dep as Window;
+                if (window != null) return true;
+                dep = VisualTreeHelper.GetParent(dep);
+            }
+            return false;
         }
     }
 }

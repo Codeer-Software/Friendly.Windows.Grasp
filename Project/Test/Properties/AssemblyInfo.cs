@@ -3,14 +3,14 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // アセンブリに関する一般情報は以下の属性セットをとおして制御されます。
-// アセンブリに関連付けられている情報を変更するには、
+// 制御されます。アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
-[assembly: AssemblyTitle("Codeer.Friendly.Windows.Grasp.3.5")]
+[assembly: AssemblyTitle("Test")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Codeer.Friendly.Windows.Grasp.3.5")]
-[assembly: AssemblyCopyright("Copyright ©  2017")]
+[assembly: AssemblyCompany("HP Inc.")]
+[assembly: AssemblyProduct("Test")]
+[assembly: AssemblyCopyright("Copyright © HP Inc. 2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,19 +20,17 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // このプロジェクトが COM に公開される場合、次の GUID が typelib の ID になります
-[assembly: Guid("9e5e0422-d4a4-4fb4-9a48-198d15c4d996")]
+[assembly: Guid("d09f4635-c19b-4cf3-83ef-8cd8690d4d23")]
 
-// アセンブリのバージョン情報は次の 4 つの値で構成されています:
+// アセンブリのバージョン情報は、以下の 4 つの値で構成されています:
 //
 //      メジャー バージョン
 //      マイナー バージョン
 //      ビルド番号
-//      Revision
+//      リビジョン
 //
 // すべての値を指定するか、次を使用してビルド番号とリビジョン番号を既定に設定できます
-// 以下のように '*' を使用します:
+// 既定値にすることができます:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("2.11.0.0")]
-[assembly: AssemblyFileVersion("2.11.0.0")]
-[assembly: Codeer.Friendly.Inside.FriendlyInfoAttribute("invisible")]
-[assembly: System.CLSCompliant(true)]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]

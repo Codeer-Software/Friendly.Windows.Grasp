@@ -807,6 +807,43 @@ namespace Codeer.Friendly.Windows.Grasp
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public WindowControl[] GetChildren()
+        {
+            var list = new List<WindowControl>();
+            for (int i = 0; i < _root.Children.Length; i++)
+            {
+                var e = _root.Children[i];
+                if (e.Handle != IntPtr.Zero)
+                {
+                    list.Add(new WindowControl(App, e.Handle));
+                }
+                else
+                {
+                    list.Add(new WindowControl(_windowInfoInApp["Children"]()["[]"](i)["_targetObject"]()));
+                }
+            }
+            return list.ToArray();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public WindowControl[] GetDescendants()
+        {
+            var list = new List<WindowControl>();
+            foreach(var e in GetChildren())
+            {
+                list.Add(e);
+                list.AddRange(e.GetDescendants());
+            }
+            return list.ToArray();
+        }
+
 #if ENG
         /// <summary>
         /// For WPF windows.
