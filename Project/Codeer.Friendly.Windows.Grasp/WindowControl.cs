@@ -808,9 +808,9 @@ namespace Codeer.Friendly.Windows.Grasp
         }
 
         /// <summary>
-        /// 
+        /// Get children.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>children.</returns>
         public WindowControl[] GetChildren()
         {
             var list = new List<WindowControl>();
@@ -830,9 +830,9 @@ namespace Codeer.Friendly.Windows.Grasp
         }
 
         /// <summary>
-        /// 
+        /// Get descendants.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>descendants.</returns>
         public WindowControl[] GetDescendants()
         {
             var list = new List<WindowControl>();
