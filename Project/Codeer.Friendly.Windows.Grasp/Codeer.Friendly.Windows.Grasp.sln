@@ -9,6 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codeer.Friendly.Windows.Gra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "..\Test\Test.csproj", "{D09F4635-C19B-4CF3-83EF-8CD8690D4D23}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nuget", "Nuget", "{5E4B0E32-329C-453E-99CE-933712828F61}"
+	ProjectSection(SolutionItems) = preProject
+		..\Nuget\Friendly.Windows.Grasp.nuspec = ..\Nuget\Friendly.Windows.Grasp.nuspec
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
