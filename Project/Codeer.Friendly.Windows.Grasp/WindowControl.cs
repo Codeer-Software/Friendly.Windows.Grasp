@@ -674,6 +674,7 @@ namespace Codeer.Friendly.Windows.Grasp
         /// <returns>特定されたウィンドウ。(特定前に、非同期処理が終了した場合はnull)</returns>
         private static WindowControl WaitForIdentifyWindow(WindowsAppFriend app, FindTopLevelWindow find, Async async)
         {
+            var identifyOneTime = app.TryGetAppControlInfo("Codeer.Friendly.Windows.Grasp.WindowControl.IdentifyOneTime", out var obj);
             while (true)
             {
                 WindowControl[] next = find();
@@ -685,6 +686,7 @@ namespace Codeer.Friendly.Windows.Grasp
                 {
                     return null;
                 }
+                if (identifyOneTime) return null;
                 Thread.Sleep(10);
             }
         }
