@@ -46,6 +46,15 @@ namespace Codeer.Friendly.Windows.Grasp.Inside
                         ohterSystemAnalyzers = app.Dim(new IOtherSystemWindowAnalyzer[1]);
                         ohterSystemAnalyzers["[]"](0, wpfAnalyzer);
                     }
+                    else
+                    {
+                        var path = Path.Combine(Path.GetDirectoryName(typeof(TargetAppInitializer).Assembly.Location), "Codeer.Friendly.Windows.Grasp.3.5.dll");
+                        var asm = Assembly.LoadFrom(path);
+                        app.LoadAssembly(asm);
+                        AppVar wpfAnalyzer = app.Dim(new NewInfo("Codeer.Friendly.Windows.Grasp.Inside.WpfAnalyzerForCore"));
+                        ohterSystemAnalyzers = app.Dim(new IOtherSystemWindowAnalyzer[1]);
+                        ohterSystemAnalyzers["[]"](0, wpfAnalyzer);
+                    }
                 }
                 catch { }
                 if (ohterSystemAnalyzers == null)
@@ -64,6 +73,9 @@ namespace Codeer.Friendly.Windows.Grasp.Inside
         /// <returns></returns>
         static bool InstallWpfInApp()
         {
+            //.NetCore判定
+            if (typeof(object).Assembly.Location.ToLower().EndsWith("system.private.corelib.dll")) return false;
+
             TypeFinder finder = new TypeFinder();
             Type t = finder.GetType("Codeer.Friendly.Windows.Wpf.Grasp.WpfAnalyzer");
             if (t != null)
