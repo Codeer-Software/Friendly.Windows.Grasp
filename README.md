@@ -24,6 +24,8 @@ Use WindowControl.<br>
 The top level window can be got using the static method.<br>
 And the extension method of WindowsAppFriend is prepared, you can write like this.<br>
 ```cs  
+var app = new WindowsAppFriend(process);
+
 var topwLevelWindows = WindowControl.GetTopLevelWindows(app);
 var mainWindow = WindowControl.WaitForIdentifyFromTypeFullName(app, "Target.MainWindow");
 
@@ -153,7 +155,7 @@ using (var app = new WindowsAppFriend(process))
 ```
 ```cs  
 //Sample WinForms
-var process = Process.GetProcessesByName("NativeTarget")[0];  
+var process = Process.GetProcessesByName("FormsTarget")[0];  
 using (var app = new WindowsAppFriend(process))  
 {  
     //Wait for identify by type full name.
