@@ -15,11 +15,11 @@ https://www.nuget.org/packages/Codeer.Friendly.Windows.Grasp/
 
 ***
 ## Features ...
-The main purpose is to search for windows.<br>
+The main purpose is to search for window.<br>
 To test, you first need to get the target Window.<br>
 And sub use case, Win32 level operation can be performed to window.<br>
 
-## Window Search
+## Search for window
 Use WindowControl.<br>
 The top level window can be got using the static method.<br>
 And the extension method of WindowsAppFriend is prepared, you can write like this.<br>
