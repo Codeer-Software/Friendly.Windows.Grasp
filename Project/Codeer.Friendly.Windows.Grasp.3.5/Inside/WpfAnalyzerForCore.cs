@@ -64,18 +64,23 @@ namespace Codeer.Friendly.Windows.Grasp.Inside
         /// <returns>オブジェクト</returns>
         public object FromHandle(IntPtr windowHandle)
         {
-            if (Application.Current != null)
+            try
             {
-                foreach (Window element in Application.Current.Windows)
+                if (Application.Current != null)
                 {
-                    if (new WindowInteropHelper(element).Handle == windowHandle)
+                    foreach (Window element in Application.Current.Windows)
                     {
-                        return element;
+                        if (new WindowInteropHelper(element).Handle == windowHandle)
+                        {
+                            return element;
+                        }
                     }
                 }
+                HwndSource hwndSource = HwndSource.FromHwnd(windowHandle);
+                return hwndSource == null ? null : hwndSource.RootVisual;
             }
-            HwndSource hwndSource = HwndSource.FromHwnd(windowHandle);
-            return hwndSource == null ? null : hwndSource.RootVisual;
+            catch { }
+            return null;
         }
 
         /// <summary>
