@@ -16,6 +16,7 @@ namespace Codeer.Friendly.Windows.Grasp.Inside
 {
     /// <summary>
     /// WPF解析。
+    /// .NetCore用
     /// </summary>
     public class WpfAnalyzerForCore : IOtherSystemWindowAnalyzer
     {
@@ -63,18 +64,18 @@ namespace Codeer.Friendly.Windows.Grasp.Inside
         /// <returns>オブジェクト</returns>
         public object FromHandle(IntPtr windowHandle)
         {
-            if (Application.Current == null)
+            if (Application.Current != null)
             {
-                return null;
-            }
-            foreach (Window element in Application.Current.Windows)
-            {
-                if (new WindowInteropHelper(element).Handle == windowHandle)
+                foreach (Window element in Application.Current.Windows)
                 {
-                    return element;
+                    if (new WindowInteropHelper(element).Handle == windowHandle)
+                    {
+                        return element;
+                    }
                 }
             }
-            return null;
+            HwndSource hwndSource = HwndSource.FromHwnd(windowHandle);
+            return hwndSource == null ? null : hwndSource.RootVisual;
         }
 
         /// <summary>

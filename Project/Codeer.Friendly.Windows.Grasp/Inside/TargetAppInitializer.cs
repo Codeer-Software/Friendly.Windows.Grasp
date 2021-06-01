@@ -39,7 +39,6 @@ namespace Codeer.Friendly.Windows.Grasp.Inside
                 AppVar ohterSystemAnalyzers = null;
                 try
                 {
-                    app["System.Windows.Application.Current"]()["Windows"]()["Count"]()["ToString"](); //ここでWPFのライブラリがロードできるかチェックする。
                     if ((bool)app[typeof(TargetAppInitializer), "InstallWpfInApp"]().Core)
                     {
                         AppVar wpfAnalyzer = app.Dim(new NewInfo("Codeer.Friendly.Windows.Wpf.Grasp.WpfAnalyzer"));
