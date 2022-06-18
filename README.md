@@ -67,7 +67,7 @@ The name of the search function is a combination of the following two patterns.
 |Behavior||
 |----|----|
 |Get|Get all windows that meet the specified conditions.|
-|Identify|Get When Identify only one by the order condition. Else thrrow Exception.|
+|Identify|Get When Identify only one by the order condition. Else throw Exception.|
 |WaitForIdentify|Wait for identify only one by the order condition. Useful for timing control.|
 
 <br>
@@ -107,7 +107,7 @@ The name of the search function is a combination of the following two patterns.
 * GetFromWindowClass
 * GetChildren
 
-### manuplate window.
+### manipulate window.
 * IsWindow
 * SetWindowText
 * GetWindowText
@@ -176,3 +176,4 @@ using (var app = new WindowsAppFriend(process))
     tree.GetItem("item1", "item2").EmulateSelect(); 
 }  
 ```
+
