@@ -118,7 +118,7 @@ namespace Codeer.Friendly.Windows.Grasp.Inside.InApp
         {
             if (checkHit(info))
             {
-                hitWindows.Add(info.TargetObject);
+                hitWindows.Add(info.GetTargetObject());
             }
             for (int i = 0; i < info.Children.Length; i++)
             {
@@ -178,7 +178,7 @@ namespace Codeer.Friendly.Windows.Grasp.Inside.InApp
                 }
                 if (isSame)
                 {
-                    return info.TargetObject;
+                    return info.GetTargetObject();
                 }
             }
             for (int i = 0; i < info.Children.Length; i++)
@@ -231,19 +231,19 @@ namespace Codeer.Friendly.Windows.Grasp.Inside.InApp
                 if (obj != null)
                 {
                     info.TypeFullName = obj.TypeFullName;
-                    info.TargetObject = obj.TargetObject;
+                    info.SetTargetObject(obj.GetTargetObject());
                     otherSystemChildren.AddRange(obj.Children);
                     break;
                 }
             }
-            if (info.TargetObject == null)
+            if (info.GetTargetObject() == null)
             {
                 //.Netのコントロールの場合、型を取得する
                 Control net = Control.FromHandle(info.Handle);
                 if (net != null)
                 {
                     info.TypeFullName = net.GetType().FullName;
-                    info.TargetObject = net;
+                    info.SetTargetObject(net);
                 }
             }
 

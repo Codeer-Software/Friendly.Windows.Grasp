@@ -9,80 +9,76 @@ namespace Codeer.Friendly.Windows.Grasp.Inside
 	[Serializable]
 	public class WindowInfo
 	{
-		IntPtr _handle;
-		string _text = string.Empty;
-		string _typeFullName = string.Empty;
-		string _dotNetFieldPath = string.Empty;
-		string _className = string.Empty;
-		int _dialogId;
-        int[] _zIndex = new int[0];
-        int[] _logicalTreeIndex = new int[0];
-        int[] _visualTreeIndex = new int[0];
-        WindowInfo[] _children = new WindowInfo[0];
-		Rectangle _bounds;
-        
         [NonSerialized]
         object _targetObject;
 
 		/// <summary>
 		/// ウィンドウハンドル。
 		/// </summary>
-		public IntPtr Handle { get { return _handle; } set { _handle = value; } }
+		public IntPtr Handle { get; set; }
 
-		/// <summary>
-		/// ウィンドウテキスト。
-		/// </summary>
-		public string Text { get { return _text; } set { _text = value; } }
+        /// <summary>
+        /// ウィンドウテキスト。
+        /// </summary>
+        public string Text { get; set; }
 
 		/// <summary>
 		/// .Netタイプフルネーム。
 		/// </summary>
-		public string TypeFullName { get { return _typeFullName; } set { _typeFullName = value; } }
+		public string TypeFullName { get; set; }
 
 		/// <summary>
 		/// .Netの場合、この変数を取得するためのフルパス。
 		/// </summary>
-		public string DotNetFieldPath { get { return _dotNetFieldPath; } set { _dotNetFieldPath = value; } }
+		public string DotNetFieldPath { get; set; }
 
 		/// <summary>
 		/// ダイアログID。
 		/// </summary>
-		public int DialogId { get { return _dialogId; } set { _dialogId = value; } }
+		public int DialogId { get; set; }
 
 		/// <summary>
 		/// ZIndex。
 		/// </summary>
-		public int[] ZIndex { get { return _zIndex; } set { _zIndex = value; } }
+		public int[] ZIndex { get; set; }
 
         /// <summary>
         /// LogicalTreeで取得した順番Index。
         /// </summary>
-        public int[] LogicalTreeIndex { get { return _logicalTreeIndex; } set { _logicalTreeIndex = value; } }
+        public int[] LogicalTreeIndex { get; set; }
 
         /// <summary>
         /// VisualTreeで取得した順番Index。
         /// </summary>
-        public int[] VisualTreeIndex { get { return _visualTreeIndex; } set { _visualTreeIndex = value; } }
+        public int[] VisualTreeIndex { get; set; }
 
 		/// <summary>
 		/// ウィンドウクラス名称。
 		/// </summary>
-		public string ClassName { get { return _className; } set { _className = value; } }
+		public string ClassName { get; set; }
 
 		/// <summary>
 		/// 子ウィンドウ。
 		/// </summary>
-		public WindowInfo[] Children { get { return _children; } set { _children = value; } }
+		public WindowInfo[] Children { get; set; }
 
         /// <summary>
         /// スクリーン座標での矩形。
         /// </summary>
-        public Rectangle Bounds { get { return _bounds; } set { _bounds = value; } }
+        public Rectangle Bounds { get; set; }
 
         /// <summary>
-        /// 対象オブジェクト。
+        /// 対象オブジェクト取得。
         /// シリアライズ対象外。
         /// </summary>
-        public object TargetObject { get { return _targetObject; } set { _targetObject = value; } }
+        /// <returns>対象オブジェクト</returns>
+        public object GetTargetObject() => _targetObject;
+
+        /// <summary>
+        /// 対象オブジェクト設定。
+        /// シリアライズ対象外。
+        /// </summary>
+		/// <param name="obj">対象オブジェクト</param>
+        public void SetTargetObject(object obj) => _targetObject = obj;
     }
 }

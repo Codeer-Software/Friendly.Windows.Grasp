@@ -217,7 +217,7 @@ namespace Codeer.Friendly.Windows.Grasp.Inside
         {
             for (int i = 0; i < list.Count; i++)
             {
-                if (ReferenceEquals(obj.TargetObject, list[i].TargetObject))
+                if (ReferenceEquals(obj.GetTargetObject(), list[i].GetTargetObject()))
                 {
                     return i;
                 }
@@ -300,7 +300,7 @@ namespace Codeer.Friendly.Windows.Grasp.Inside
             WindowInfo info = new WindowInfo();
 
             //情報設定
-            info.TargetObject = target;
+            info.SetTargetObject(target);
             info.TypeFullName = target.GetType().FullName;
             FrameworkElement frameworkElement = target as FrameworkElement;
             if (frameworkElement != null && frameworkElement.IsLoaded)

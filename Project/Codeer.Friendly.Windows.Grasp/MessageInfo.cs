@@ -16,11 +16,6 @@ namespace Codeer.Friendly.Windows.Grasp
     [Serializable]
     public class MessageInfo
     {
-        int _message;
-        IntPtr _wParam;
-        IntPtr _lParam;
-
-
 #if ENG
         /// <summary>
         /// message.
@@ -30,7 +25,7 @@ namespace Codeer.Friendly.Windows.Grasp
         /// メッセージ。
         /// </summary>
 #endif
-        public int Message { get { return _message; } }
+        public int Message { get; set; }
 
 #if ENG
         /// <summary>
@@ -41,7 +36,7 @@ namespace Codeer.Friendly.Windows.Grasp
         /// wparam。
         /// </summary>
 #endif
-        public IntPtr WParam { get { return _wParam; } }
+        public IntPtr WParam { get; set; }
 
 #if ENG
         /// <summary>
@@ -52,7 +47,18 @@ namespace Codeer.Friendly.Windows.Grasp
         /// lparam。
         /// </summary>
 #endif
-        public IntPtr LParam { get { return _lParam; } }
+        public IntPtr LParam { get; set; }
+
+#if ENG
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+#else
+        /// <summary>
+        /// コンストラクタ。
+        /// </summary>
+#endif
+        public MessageInfo() { }
 
 #if ENG
         /// <summary>
@@ -89,9 +95,9 @@ namespace Codeer.Friendly.Windows.Grasp
 #endif
         public MessageInfo(int message, IntPtr wparam, IntPtr lparam)
         {
-            _message = message;
-            _wParam = wparam;
-            _lParam = lparam;
+            Message = message;
+            WParam = wparam;
+            LParam = lparam;
         }
 
         /// <summary>
