@@ -11,10 +11,10 @@ namespace Codeer.Friendly.Windows.Grasp.Inside
 	/// </summary>
 	public static class NativeMethods
 	{
-		/// <summary>
+        /// <summary>
         /// GetWindow関数のコマンド。
-		/// </summary>
-		internal enum GetWindowCmd
+        /// </summary>
+        public enum GetWindowCmd
 		{
 			GW_HWNDFIRST = 0,
 			GW_HWNDLAST = 1,
@@ -75,7 +75,7 @@ namespace Codeer.Friendly.Windows.Grasp.Inside
         /// <summary>
         /// 先祖フラグ
         /// </summary>
-        internal enum GetAncestorFlags
+        public enum GetAncestorFlags
         {
             GA_PARENT = 1,
             GA_ROOT = 2,
